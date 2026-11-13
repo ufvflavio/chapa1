@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapa 1 Conselho Agros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* Layout: faixa de rascunho, cabeçalho fixo, seções em coluna única de 1040px, painel de números em tabela com barras. */
+:root{
+  --ink:#0f2347;
+  --ink-soft:#475a78;
+  --paper:#f4f7fc;
+  --card:#ffffff;
+  --line:#d6e0f0;
+  --teal:#1d5cc0;
+  --teal-dark:#0b3c8b;
+  --teal-tint:#e2ecfa;
+  --amber:#6cc3f5;
+  --amber-tint:#e6f4fd;
+  --display:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.125rem;line-height:1.6}
+a{color:var(--teal-dark)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h2{font-size:clamp(1.7rem,3.2vw,2.3rem);color:var(--teal-dark)}
+h3{font-size:1.25rem}
+p{margin:0 0 1em}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+.lead{font-size:1.12rem;color:var(--ink-soft);max-width:65ch}
+.eyebrow{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;color:var(--teal)}
+
+.draft{background:var(--amber-tint);border-bottom:2px solid var(--amber);font-size:.92rem;padding:8px 0;text-align:center}
+.draft strong{color:var(--teal-dark)}
+
+.util{background:var(--teal-dark);color:#fff;font-size:.85rem}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;gap:8px 20px;flex-wrap:wrap;padding-top:6px;padding-bottom:6px}
+.util a{color:#fff;text-decoration:none;margin-left:16px}
+.util a:hover{text-decoration:underline}
+.fsz{display:flex;align-items:center;gap:6px}
+.fsz button{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:5px;font:inherit;font-weight:700;padding:1px 9px;cursor:pointer}
+.fsz button:hover{background:rgba(255,255,255,.28)}
+header.top{position:sticky;top:0;z-index:10;background:#fff;border-bottom:3px solid var(--amber);box-shadow:0 2px 8px rgba(11,60,139,.08)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;min-height:68px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.brand{font-family:var(--display);font-weight:700;font-size:1.2rem;display:flex;align-items:center;gap:12px;color:var(--teal-dark);text-decoration:none}
+.brand .num{background:var(--teal-dark);color:#fff;border-radius:8px;padding:2px 12px;font-size:1.4rem}
+.brand small{display:block;font-family:var(--body);font-weight:600;font-size:.75rem;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase}
+nav{display:flex;gap:4px 22px;flex-wrap:wrap}
+nav a{color:var(--teal-dark);text-decoration:none;font-weight:600;font-size:.98rem;padding:6px 0;border-bottom:3px solid transparent}
+nav a:hover{border-bottom-color:var(--amber)}
+
+.hero{background:linear-gradient(135deg,#0b3c8b 0%,#1550ae 60%,#1d5cc0 100%);color:#fff;padding:60px 0 64px}
+.hero{position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:2;pointer-events:none}
+.hero-text{max-width:520px;pointer-events:auto}
+.hero-bg{position:absolute;top:0;bottom:0;right:0;left:calc(max(20px,(100% - 1040px)/2) + 500px);display:flex;align-items:center;justify-content:center;z-index:1;pointer-events:none}
+.cand{position:relative;margin:0;flex:0 1 auto;width:62%;min-width:0;pointer-events:auto;cursor:pointer;outline-offset:4px}
+.cand+.cand{margin-left:-12%}
+.cand img{display:block;width:100%;height:auto;opacity:.82;transition:opacity 1s ease,-webkit-mask-size 1s ease,mask-size 1s ease;
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 62%,transparent 96%);mask-image:linear-gradient(180deg,#000 0,#000 62%,transparent 96%);
+  -webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:top;mask-position:top}
+.cand:hover,.cand:focus-visible,.cand:focus{z-index:5}
+.cand:hover img,.cand:focus img{opacity:1;-webkit-mask-size:100% 400%;mask-size:100% 400%}
+.bio{visibility:hidden;opacity:0;transform:translateY(10px) scale(.97);transition:opacity .8s ease .25s,transform .8s ease .25s,visibility 0s linear 1.05s;
+  position:absolute;left:0;right:0;bottom:4%;background:rgba(11,36,84,.93);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:26px;padding:18px 20px;font-size:.84rem;line-height:1.5;box-shadow:0 14px 36px rgba(6,20,52,.4),0 2px 8px rgba(6,20,52,.25)}
+.bio b{display:block;font-family:var(--display);font-size:1.08rem;margin:3px 0 8px}
+.bio .r{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);background:var(--amber);border-radius:999px;padding:2px 10px}
+.cand:hover .bio,.cand:focus .bio{visibility:visible;opacity:1;transform:none;transition:opacity .8s ease .25s,transform .8s ease .25s,visibility 0s}
+.hero{min-height:560px}
+@media (max-width:900px){
+  .hero{padding-bottom:0;min-height:0}
+  .hero-bg{position:static;padding:28px 20px 0;max-width:520px;margin:0 auto;pointer-events:none}
+  .cand{width:56%;pointer-events:none}
+  .cand+.cand{margin-left:-8%}
+  .cand img{opacity:.9}
+  .bio{display:none!important}
+}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.6rem);max-width:18ch}
+.hero .sig{font-family:var(--display);font-size:clamp(1.15rem,2.4vw,1.5rem);margin:18px 0 28px;color:#fff;max-width:34ch}
+.hero .sig em{font-style:normal;color:var(--amber)}
+.hero .date{display:inline-flex;gap:14px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:12px 18px;margin-bottom:26px}
+.hero .date b{font-size:1.9rem;font-family:var(--display);color:var(--amber);line-height:1}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--amber);color:var(--teal-dark);font-weight:700;text-decoration:none;padding:13px 22px;border-radius:8px;border:0;font:inherit;font-weight:700;cursor:pointer}
+.btn:hover{filter:brightness(.93)}
+.btn.big{padding:15px 28px;font-size:1.05rem}
+.btn.ghost{background:transparent;color:#fff;border:2px solid #fff}
+.btn.dark{background:var(--teal-dark);color:#fff}
+
+.alert{background:var(--card);border-left:6px solid var(--amber);border-radius:8px;padding:20px 22px;box-shadow:0 1px 0 var(--line);margin-top:28px}
+.alert h3{margin-bottom:6px}
+
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;margin-top:28px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
+.card .n{font-family:var(--display);font-size:2.4rem;color:var(--teal);line-height:1;font-weight:700}
+.card h3{margin:8px 0 10px;color:var(--teal-dark)}
+.card p{margin:0 0 .7em;color:var(--ink-soft);font-size:1rem}
+.card .how{font-size:.92rem;border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+
+.alt{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* abas de pilares */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 18px}
+.tab{background:var(--card);border:2px solid var(--line);color:var(--ink);font:inherit;font-weight:700;padding:10px 18px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--teal-dark);border-color:var(--teal-dark);color:#fff}
+.panel[hidden]{display:none}
+.item{display:grid;grid-template-columns:56px 1fr;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:12px}
+.item .code{font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--teal);background:var(--teal-tint);border-radius:8px;display:grid;place-items:center;height:48px}
+.item h3{font-size:1.1rem;margin-bottom:4px}
+.item p{margin:0;color:var(--ink-soft);font-size:1rem}
+.item .src{font-size:.85rem;margin-top:6px;color:var(--ink-soft)}
+
+/* painel de números */
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;min-width:560px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-size:.98rem;vertical-align:top}
+th{background:var(--teal-tint);color:var(--teal-dark);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+td.v{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+.small{font-size:.88rem;color:var(--ink-soft)}
+.bars{display:grid;gap:10px;margin:20px 0 6px;max-width:640px}
+.bar{display:grid;grid-template-columns:52px 1fr 64px;gap:12px;align-items:center;font-variant-numeric:tabular-nums}
+.bar .track{background:var(--line);border-radius:6px;height:22px;overflow:hidden}
+.bar .fill{height:100%;background:var(--teal);border-radius:6px}
+.bar.hi .fill{background:var(--teal-dark)}
+
+/* calendário */
+.cal{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:10px}
+.cal li{display:grid;grid-template-columns:110px 1fr;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 18px;align-items:center}
+.cal .d{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--teal-dark)}
+.cal li.key{border-color:var(--amber);background:var(--amber-tint)}
+.cal li.past .d{color:var(--ink-soft)}
+
+/* candidatos */
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px;margin-top:26px}
+.person{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
+.person .role{font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+.person h3{font-size:1.5rem;margin:6px 0 4px}
+.person .who{color:var(--ink-soft);margin-bottom:10px}
+.ph{display:block;width:170px;height:170px;border-radius:50%;object-fit:cover;background:#fff;border:4px solid var(--teal);box-shadow:0 0 0 4px var(--teal-tint);margin-bottom:18px}
+
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;padding:16px 18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--teal)}
+details[open] summary::after{content:"\2212"}
+details div{padding:0 18px 16px;color:var(--ink-soft)}
+
+.share{background:var(--teal-tint);border:1px solid var(--line);border-radius:12px;padding:24px;margin-top:24px}
+.share blockquote{margin:12px 0 16px;background:var(--card);border-left:5px solid var(--teal);padding:14px 18px;border-radius:6px;font-size:1rem}
+.ok{display:inline-block;margin-left:12px;font-weight:700;color:var(--teal-dark)}
+
+footer{background:var(--ink);color:#cfd8de;padding:36px 0;font-size:.9rem}
+footer a{color:#fff}
+footer p{max-width:80ch}
+
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:22px}
+.quick a{display:flex;flex-direction:column;gap:4px;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--amber);border-radius:10px;padding:16px 18px;text-decoration:none;color:var(--teal-dark);font-weight:700}
+.quick a span{font-weight:400;font-size:.9rem;color:var(--ink-soft)}
+.quick a:hover{box-shadow:0 4px 14px rgba(11,60,139,.15)}
+.social{display:flex;gap:10px 22px;flex-wrap:wrap;margin:0 0 16px;padding:0;list-style:none}
+footer .social a{text-decoration:none;font-weight:600}
+@media (max-width:560px){
+  body{font-size:1.0625rem}
+  section{padding:44px 0}
+  .item{grid-template-columns:1fr}
+  .item .code{width:56px}
+  .cal li{grid-template-columns:1fr;gap:4px}
+  .bar{grid-template-columns:44px 1fr 56px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ===== Visual suave (sobrepõe o anterior) ===== */
+:root{--ink:#22385c;--ink-soft:#5a6d8c;--paper:#f7faff;--line:#e3ebf7;--teal:#3a78c4;--teal-dark:#1f4f95;--teal-tint:#edf4fc;--amber:#8fd0f6;--amber-tint:#f0f8fe}
+body{font-weight:400}
+h1,h2,h3{font-weight:600}
+h2{color:var(--teal-dark);font-size:clamp(1.55rem,2.8vw,2rem)}
+h3{font-size:1.15rem}
+.eyebrow{font-weight:600;letter-spacing:.1em;color:var(--teal)}
+.lead{color:var(--ink-soft)}
+section{padding:64px 0}
+.util{background:#eaf2fc;color:var(--teal-dark)}
+.util a{color:var(--teal-dark)}
+.fsz button{background:#fff;color:var(--teal-dark);border:1px solid #c9d9ef;border-radius:999px}
+.fsz button:hover{background:#dbe8f8}
+header.top{border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(31,79,149,.06)}
+.brand .num{background:linear-gradient(135deg,#3a78c4,#1f4f95);border-radius:12px}
+nav a{font-weight:500;border-bottom-width:2px}
+.hero{background:linear-gradient(135deg,#2a63b0 0%,#4a8ad1 100%);padding:64px 0 68px}
+.hero h1{font-weight:600;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.18}
+.hero .sig{font-weight:400}
+.hero .date{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);border-radius:18px}
+.hero .date b{color:#fff;font-weight:600}
+.btn{border-radius:999px;font-weight:600;box-shadow:0 6px 16px rgba(31,79,149,.18)}
+.btn.ghost{border-width:1.5px;box-shadow:none}
+.btn.dark{background:var(--teal);color:#fff}
+.draft{background:#f0f8fe;border-bottom:1px solid #cfe6f7;color:var(--ink-soft)}
+.alert{border-left:0;background:linear-gradient(135deg,#edf5fd,#f7fbff);border:1px solid #d6e6f8;border-radius:20px;box-shadow:none}
+.alt{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.card,.person,.item,details,.cal li,.quick a,.share,table{border-radius:20px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(31,79,149,.06)}
+.card .n{font-weight:600;color:#8fb6e4}
+.card .how{border-top-color:var(--line)}
+.quick a{border-top:1px solid var(--line);font-weight:600}
+.quick a:hover{box-shadow:0 10px 28px rgba(31,79,149,.14);transform:translateY(-2px);transition:all .25s}
+.item .code{background:#edf4fc;color:var(--teal);border-radius:14px;font-weight:600}
+.tab{border:1px solid var(--line);font-weight:500;color:var(--teal-dark)}
+.tab[aria-selected="true"]{background:var(--teal);border-color:var(--teal);color:#fff}
+.cal li{box-shadow:none}
+.cal li.key{background:#f0f8fe;border-color:#bfe0f7}
+th{background:#f2f7fd;color:var(--teal-dark);font-weight:600}
+table{border-collapse:separate;border-spacing:0;overflow:hidden}
+.bar .track{background:#e6eef9;height:18px;border-radius:999px}
+.bar .fill{border-radius:999px;background:#7fb0e6}
+.bar.hi .fill{background:#3a78c4}
+.share{background:#f3f8fe;box-shadow:none}
+.share blockquote{border-left:0;border-radius:16px;border:1px solid var(--line)}
+.ph{border:3px solid #fff;box-shadow:0 0 0 2px #cfe0f5,0 8px 20px rgba(31,79,149,.15)}
+.person .role{font-weight:600;color:var(--teal)}
+summary{font-weight:600;color:var(--teal-dark)}
+footer{background:#2a4a7d;color:#dce8f8}
+.bio{border-radius:28px}
+
+.bio{left:6%;right:6%;bottom:6%;padding:11px 14px;font-size:.74rem;line-height:1.42;border-radius:22px}
+.bio b{font-size:.95rem;margin:2px 0 5px}
+.bio .r{font-size:.6rem;padding:1px 8px}
+</style>
+</head>
+<body>
+
+<div class="draft"><div class="wrap"><strong>Versão provisória para validação da chapa.</strong> Textos, números e fotos ainda serão conferidos antes da divulgação.</div></div>
+
+<div class="util">
+  <div class="wrap">
+    <span>Eleição do Conselho Deliberativo do Agros · 27/11/2026</span>
+    <span style="display:flex;align-items:center;flex-wrap:wrap">
+      <span class="fsz" aria-label="Tamanho do texto"><button type="button" data-fs="-1" aria-label="Diminuir texto">A-</button><button type="button" data-fs="0" aria-label="Texto normal">A</button><button type="button" data-fs="1" aria-label="Aumentar texto">A+</button></span>
+      <a href="#votar">Como votar</a><a href="#duvidas">Dúvidas</a><a href="#contato">Fale com a chapa</a>
+    </span>
+  </div>
+</div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><span class="num">1</span><span>Chapa 1<small>Conselho Deliberativo</small></span></a>
+    <nav aria-label="Seções">
+      <a href="#candidatos">A chapa</a>
+      <a href="#compromissos">Compromissos</a>
+      <a href="#plataforma">Plataforma</a>
+      <a href="#numeros">Números</a>
+      <a href="#votar">Como votar</a>
+      <a href="#duvidas">Dúvidas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero" id="inicio">
+  
+  <div class="wrap">
+    <div class="hero-text">
+      <p class="eyebrow" style="color:var(--amber)">Eleição do Conselho Deliberativo do Agros</p>
+      <h1>Transparência hoje. Sustentabilidade amanhã.</h1>
+      <p class="sig">Contas claras para <em>o seu benefício</em> e <em>a sua saúde</em>.</p>
+      <div class="date"><b>27/11</b><span>Dia da eleição<br>Voto eletrônico e presencial</span></div>
+      <div class="btns">
+        <a class="btn big" href="#votar">Como votar</a>
+        <a class="btn ghost big" href="#compromissos">Nossas propostas</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-bg">
+    <figure class="cand" tabindex="0" aria-label="Flávio Magno, titular. Passe o mouse para ver o currículo.">
+      <img src="img/flavio_bg.png" alt="Flávio Magno">
+      <figcaption class="bio"><span class="r">Titular</span><b>Flávio Magno</b>Mestre em Administração. Ingressou no COLUNI em 2012 e foi removido para a PGP em 2022. Atua na manutenção das informações de serviços em benefício dos servidores e na divulgação de painéis de transparência no site da PGP. Coordena concursos (UFV, OAB, ENEM, REVALIDA). Junto com o suplente, idealizou o sistema RSC da UFV.</figcaption>
+    </figure>
+    <figure class="cand" tabindex="0" aria-label="Ricardo Gandini, suplente. Passe o mouse para ver o currículo.">
+      <img src="img/ricardo_bg.png" alt="Ricardo Gandini">
+      <figcaption class="bio"><span class="r">Suplente</span><b>Ricardo Gandini</b>Mestre em Administração. Ingressou na UFV em 2004 e é assessor especial da PGP, com vasta experiência em gestão de pessoas, liderança de comissões e coordenação de concursos. Presidente da Comissão de Implantação do PGD. Foi membro do Conselho Deliberativo e, junto com o titular, idealizou o sistema RSC da UFV.</figcaption>
+    </figure>
+  </div>
+</div>
+
+<section style="padding:36px 0 8px">
+  <div class="wrap">
+    <p class="eyebrow">Acesso rápido</p>
+    <div class="quick">
+      <a href="#votar">Como votar<span>Datas e passo a passo</span></a>
+      <a href="#votar">Atualizar o cadastro<span>Último dia: 16/11</span></a>
+      <a href="#compromissos">Nossas propostas<span>Três compromissos centrais</span></a>
+      <a href="#numeros">Números do Agros<span>Com fonte e período</span></a>
+      <a href="#candidatos">Quem somos<span>Titular e suplente</span></a>
+      <a href="#contato">Fale com a chapa<span>Dúvidas e sugestões</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="votar">
+  <div class="wrap">
+    <p class="eyebrow">Para você votar</p>
+    <h2>Confira o seu cadastro até 16 de novembro</h2>
+    <p class="lead">Para receber a senha do voto eletrônico, seu e-mail e seu celular precisam estar atualizados no Agros. Participantes ativos e assistidos de planos previdenciários, maiores de 18 anos, têm direito a voto. Cada pessoa vota uma vez.</p>
+
+    <div class="alert">
+      <h3>Última data para atualizar o cadastro: segunda-feira, 16/11</h3>
+      <p>Avise também colegas, familiares e conhecidos que participam do Agros. <span class="small">[Como atualizar: canal oficial informado pelo Agros ou pela Comissão Eleitoral.]</span></p>
+    </div>
+
+    <ol class="cal" aria-label="Calendário da eleição">
+      <li class="past"><span class="d">11/11</span><span>Início da campanha</span></li>
+      <li class="key"><span class="d">16/11</span><span><strong>Último dia para atualizar e-mail e celular no cadastro</strong>, para receber a senha de votação</span></li>
+      <li><span class="d">12 a 26/11</span><span>Divulgação das chapas no site do Agros</span></li>
+      <li><span class="d">26/11</span><span>Último dia de campanha</span></li>
+      <li class="key"><span class="d">27/11</span><span><strong>Eleição.</strong> Votação eletrônica e votação presencial em Viçosa e Florestal</span></li>
+      <li><span class="d">1 a 4/12</span><span>Prazo para recursos</span></li>
+    </ol>
+    <p class="small" style="margin-top:14px">Fonte: Resolução do Conselho Deliberativo nº 580 (normas e calendário da eleição). Confira sempre as informações oficiais do Agros.</p>
+
+    <div class="share" style="margin-top:28px">
+      <h3>Não deixe passar</h3>
+      <p>Crie um lembrete no seu calendário ou mande um aviso pelo WhatsApp para você e para quem você quiser.</p>
+      <div class="btns">
+        <a class="btn dark" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Atualizar%20cadastro%20no%20Agros%20%28%C3%BAltimo%20dia%29&amp;dates=20261116/20261117&amp;details=Confira%20se%20seu%20e-mail%20e%20celular%20est%C3%A3o%20atualizados%20no%20Agros%20para%20receber%20a%20senha%20do%20voto%20eletr%C3%B4nico." target="_blank" rel="noopener">Lembrar do cadastro (16/11)</a>
+        <a class="btn dark" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Votar%20no%20Conselho%20Deliberativo%20do%20Agros&amp;dates=20261127T090000/20261127T180000&amp;ctz=America%2FSao_Paulo&amp;details=Elei%C3%A7%C3%A3o%20do%20Conselho%20Deliberativo%20do%20Agros.%20Voto%20eletr%C3%B4nico%20%28senha%20enviada%20ao%20e-mail%20e%20celular%20cadastrados%29%20ou%20presencial%20em%20Vi%C3%A7osa%20e%20Florestal.%20Chapa%201." target="_blank" rel="noopener">Lembrar da votação (27/11)</a>
+        <a class="btn dark" href="https://wa.me/?text=Lembrete%3A%20a%20elei%C3%A7%C3%A3o%20do%20Conselho%20Deliberativo%20do%20Agros%20%C3%A9%20dia%2027/11.%20Para%20receber%20a%20senha%20do%20voto%20eletr%C3%B4nico%2C%20confira%20at%C3%A9%20segunda-feira%2C%2016/11%2C%20se%20seu%20e-mail%20e%20celular%20est%C3%A3o%20atualizados%20no%20Agros." target="_blank" rel="noopener">Enviar lembrete pelo WhatsApp</a>
+      </div>
+      <p class="small" style="margin:12px 0 0">Os lembretes de calendário abrem no Google Agenda. No WhatsApp, você escolhe quem recebe a mensagem.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="compromissos" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Nossos três compromissos centrais</p>
+    <h2>O que vamos pedir, cobrar e publicar</h2>
+    <p class="lead">Prometemos o que está ao alcance de um conselheiro: propor, pedir informação, fiscalizar, votar com critério e prestar contas. O Conselho decide em conjunto, com seis membros em paridade, e por isso dizemos com clareza o que cada voto nosso significa.</p>
+
+    <div class="grid3">
+      <article class="card">
+        <div class="n">1</div>
+        <h3>Painel de resultados</h3>
+        <p>A cada semestre, levar ao Conselho e publicar, em linguagem simples, quanto cada plano rendeu frente à meta e quanto custa administrar o Agros.</p>
+        <p class="how"><strong>Como:</strong> pedir os indicadores à Diretoria, pautar no Conselho e divulgar aos participantes.</p>
+      </article>
+      <article class="card">
+        <div class="n">2</div>
+        <h3>Reajuste com estudo e explicação</h3>
+        <p>Nosso voto sobre custeio e reajuste do plano de saúde será condicionado a estudo atuarial, cenários e demonstrativo claro ao participante.</p>
+        <p class="how"><strong>Como:</strong> exigir os cálculos antes da votação e explicar depois o que foi decidido e por quê.</p>
+      </article>
+      <article class="card">
+        <div class="n">3</div>
+        <h3>Prestação de contas</h3>
+        <p>Resumo das reuniões do Conselho no portal em até 2 dias úteis e, a cada trimestre, um relatório do conselheiro: o que propôs, como votou e por quê.</p>
+        <p class="how"><strong>Como:</strong> cobrar o prazo do Regimento e publicar o relatório, respeitando o sigilo e a LGPD.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="plataforma">
+  <div class="wrap">
+    <p class="eyebrow">Plataforma completa</p>
+    <h2>Três pilares, nove compromissos</h2>
+    <p class="lead">Os três compromissos centrais fazem parte de uma plataforma maior. Escolha um pilar.</p>
+
+    <div class="tabs" role="tablist" aria-label="Pilares da plataforma">
+      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true" type="button">Transparência</button>
+      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" type="button">Sustentabilidade</button>
+      <button class="tab" role="tab" id="t3" aria-controls="p3" aria-selected="false" type="button">Defesa dos participantes</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
+      <div class="item"><div class="code">T1</div><div><h3>Resumo das deliberações em até 2 dias úteis</h3><p>Cobrar e acompanhar o prazo previsto no Regimento para a publicação do resumo das decisões do Conselho no portal.</p><p class="src">Base: Regimento Interno do Conselho, art. 24, §9º.</p></div></div>
+      <div class="item"><div class="code">T2</div><div><h3>Painel semestral de resultados</h3><p>Rentabilidade dos planos frente à meta, taxa de administração e despesa administrativa, publicados em linguagem simples.</p><p class="src">Base: políticas de investimentos, relatórios anuais de informações e Regulamento do PGA, art. 40.</p></div></div>
+      <div class="item"><div class="code">T3</div><div><h3>Registro público de demandas</h3><p>O que levamos ao Agros, o que o Agros respondeu, o que foi resolvido e o que continua pendente, sem expor dados pessoais.</p></div></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
+      <div class="item"><div class="code">S1</div><div><h3>Reajuste do plano de saúde com estudo atuarial</h3><p>Voto condicionado a estudo, cenários e demonstrativo que o participante consiga entender.</p><p class="src">Base: Estatuto, arts. 9º, §1º, e 41, V (custeio apresentado anualmente e competência do Conselho).</p></div></div>
+      <div class="item"><div class="code">S2</div><div><h3>Rentabilidade e alocação dos planos de previdência</h3><p>Pedir comparativo trimestral frente à meta e debater cada política de investimentos. Não prometemos retorno, que depende do mercado, mas prometemos acompanhamento e explicação.</p><p class="src">Base: Estatuto, art. 41, VII; políticas de investimentos 2024 a 2030.</p></div></div>
+      <div class="item"><div class="code">S3</div><div><h3>Custos administrativos e passivos</h3><p>Acompanhar a despesa administrativa, o fundo administrativo e o passivo de PIS/Cofins, com metas e indicadores públicos.</p><p class="src">Base: Regulamento do PGA, arts. 6º, 39 e 40; relatório anual 2025.</p></div></div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
+      <div class="item"><div class="code">D1</div><div><h3>Aviso e parcelamento de coparticipação e boletos</h3><p>Propor uma política de aviso prévio e de parcelamento, que a Diretoria implementa.</p></div></div>
+      <div class="item"><div class="code">D2</div><div><h3>Atenção aos participantes mais velhos</h3><p>Canal humano de atendimento, linguagem acessível e acompanhamento das reclamações. Em 2025, 40,2% dos beneficiários do plano de saúde tinham 59 anos ou mais.</p><p class="src">Fonte: relatório anual de informações 2025.</p></div></div>
+      <div class="item"><div class="code">D3</div><div><h3>Rede credenciada e correção dos sistemas</h3><p>Indicadores públicos de rede e de atendimento por cidade e cronograma de correção dos sistemas, com fiscalização mês a mês.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="numeros" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Linha de base</p>
+    <h2>Os números que vamos acompanhar</h2>
+    <p class="lead">Estes são os pontos de partida do painel de resultados. Todos vêm de documentos do próprio Agros, com período indicado.</p>
+
+    <h3 style="margin-top:30px">Previdência e administração</h3>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Indicador</th><th>Valor mais recente</th><th>Referência anterior</th><th>Fonte</th></tr></thead>
+      <tbody>
+        <tr><td>Rentabilidade Plano A (jan a set/2025)</td><td class="v">9,99%</td><td>3,64% em 2024</td><td>Política de investimentos 2026-2030</td></tr>
+        <tr><td>Rentabilidade InvestPrev (jan a set/2025)</td><td class="v">11,10%</td><td>7,72% em 2024</td><td>Política de investimentos 2026-2030</td></tr>
+        <tr><td>Rentabilidade VidaPrev (jan a set/2025)</td><td class="v">9,10%</td><td>Meta: INPC + 4,65% ao ano</td><td>Política de investimentos 2026-2030</td></tr>
+        <tr><td>Taxa de administração dos planos CD, por participante</td><td class="v">R$ 692,79</td><td>R$ 542,29 em 2024</td><td>Relatório anual 2025, Quadro 16</td></tr>
+        <tr><td>Taxa de administração sobre os recursos garantidores</td><td class="v">0,52%</td><td>0,42% em 2024. Limite de 1%</td><td>Relatório 2025 e Regulamento do PGA, art. 39</td></tr>
+        <tr><td>Despesa administrativa sobre receita administrativa</td><td class="v">185%</td><td>214% em 2024</td><td>Relatório anual 2025</td></tr>
+        <tr><td>Fundo administrativo</td><td class="v">R$ 10,76 mi</td><td>R$ 29,0 mi em 2023</td><td>Relatório anual 2025</td></tr>
+        <tr><td>Beneficiários do plano de saúde</td><td class="v">13.942</td><td>14.781 em 2023</td><td>Relatórios anuais 2023 e 2025</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small" style="margin-top:12px">Rentabilidades de 2025 são parciais (janeiro a setembro) e não devem ser comparadas com anos fechados. Os dados são apresentados como ponto de partida para acompanhamento, não como julgamento sobre a gestão.</p>
+  </div>
+</section>
+
+<section id="onde" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Onde votar</p>
+    <h2>Pela internet ou presencialmente</h2>
+    <div class="grid3">
+      <article class="card"><h3>Voto eletrônico</h3><p>Pela internet, com a senha enviada ao e-mail e ao celular cadastrados no Agros.</p></article>
+      <article class="card"><h3>Presencial em Viçosa</h3><p>[Local e horário a confirmar com a Comissão Eleitoral.]</p></article>
+      <article class="card"><h3>Presencial em Florestal</h3><p>[Local e horário a confirmar com a Comissão Eleitoral.]</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="candidatos">
+  <div class="wrap">
+    <p class="eyebrow">Quem somos</p>
+    <h2>Titular e suplente da Chapa 1</h2>
+    <div class="people">
+      <article class="person">
+        <img class="ph" src="img/flavio_rosto.jpg" alt="Flávio Magno" width="360" height="360">
+        <span class="role">Titular</span>
+        <h3>Flávio Magno</h3>
+        <p class="who">Servidor da Pró-Reitoria de Gestão de Pessoas (PGP/UFV)</p>
+        <p>Mestre em Administração. Ingressou no COLUNI em 2012 e foi removido para a PGP em 2022. Atua na manutenção das informações de serviços em benefício dos servidores e na divulgação de painéis de transparência no site da PGP. Coordena diversos concursos (UFV, OAB, ENEM, REVALIDA). Junto com seu suplente, idealizou o sistema RSC da UFV.</p>
+      </article>
+      <article class="person">
+        <img class="ph" src="img/ricardo_rosto.jpg" alt="Ricardo Gandini" width="360" height="360">
+        <span class="role">Suplente</span>
+        <h3>Ricardo Gandini</h3>
+        <p class="who">Servidor da Pró-Reitoria de Gestão de Pessoas (PGP/UFV). Ex-membro do Conselho Deliberativo.</p>
+        <p>Mestre em Administração. Ingressou na UFV em 2004 e atualmente é assessor especial da PGP, com vasta experiência em gestão de pessoas, liderança de comissões e coordenação de concursos. É presidente da Comissão de Implantação do PGD. Foi membro do Conselho Deliberativo e, junto com o titular, idealizou o sistema RSC da UFV.</p>
+      </article>
+    </div>
+    <p class="small" style="margin-top:18px">O suplente apoia o titular e o substitui quando necessário. Nas votações do Conselho, quem vota é o titular.</p>
+  </div>
+</section>
+
+<section id="duvidas" class="alt">
+  <div class="wrap">
+    <p class="eyebrow">Perguntas frequentes</p>
+    <h2>Dúvidas comuns</h2>
+    <div style="margin-top:24px">
+      <details><summary>O que faz o Conselho Deliberativo?</summary><div>É o órgão máximo de deliberação do Agros. Tem seis membros, com paridade entre representantes dos participantes e das patrocinadoras, e mandato de 48 meses, com uma única recondução. Entre as competências estão o custeio dos planos, as políticas de investimento e decisões relevantes sobre o patrimônio. Fonte: Estatuto do Agros, art. 41.</div></details>
+      <details><summary>Quem pode votar?</summary><div>Participantes ativos e assistidos, maiores de 18 anos, inscritos em pelo menos um plano de previdência. Cada pessoa tem um voto. A votação é eletrônica, com a senha enviada ao e-mail e ao celular cadastrados, e também presencial em Viçosa e Florestal. Fonte: Resolução do Conselho Deliberativo nº 580. [A chapa confirmará com a Comissão a situação de pensionistas e autopatrocinados.]</div></details>
+      <details><summary>Não recebi nenhuma senha. O que faço?</summary><div>Confira se seu e-mail e seu celular estão atualizados no Agros. O prazo para atualizar o cadastro e receber a senha termina em 16/11. [Incluir o canal oficial de atendimento informado pelo Agros.]</div></details>
+      <details><summary>A chapa promete reduzir mensalidade ou garantir rentabilidade?</summary><div>Não. Reajustes e políticas de investimento são decididos pelo Conselho em conjunto, com base técnica, e a rentabilidade depende do mercado. Prometemos o que depende de nós: estudar, pedir informação, votar com critério, fiscalizar e publicar o que foi decidido.</div></details>
+      <details><summary>A chapa quer mudar o plano de saúde ou tirar a UFV do Agros?</summary><div>Não. Nossa proposta é de transparência, acompanhamento de resultados e melhor atendimento aos participantes dentro do Agros.</div></details>
+      <details><summary>De onde vêm os números do site?</summary><div>Dos relatórios anuais de informações de 2023, 2024 e 2025, das políticas de investimentos, do Estatuto, do Regimento e do Regulamento do PGA, todos documentos do próprio Agros. Cada número aparece com a fonte e o período.</div></details>
+    </div>
+
+    <div class="share">
+      <h3>Ajude a divulgar</h3>
+      <p>Copie a mensagem abaixo e envie para colegas, familiares e grupos de participantes.</p>
+      <blockquote id="msg">Atenção, participante do Agros: para receber a senha do voto eletrônico na eleição do Conselho Deliberativo (27/11), confira até segunda-feira, 16/11, se seu e-mail e celular estão atualizados no Agros. Avise também os colegas e familiares participantes.</blockquote>
+      <button class="btn dark" id="copy" type="button">Copiar mensagem</button><span class="ok" id="ok" role="status"></span>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="wrap">
+    <p class="eyebrow">Contato</p>
+    <h2>Fale com a chapa</h2>
+    <p class="lead">Mande sua pergunta, sugestão ou demanda para o Flávio ou para o Ricardo. Vamos registrar e responder.</p>
+    <div class="people">
+      <article class="person">
+        <span class="role">Titular</span>
+        <h3>Flávio Magno</h3>
+        <p>E-mail: <a href="mailto:flavio.pinto@ufv.br">flavio.pinto@ufv.br</a></p>
+      </article>
+      <article class="person">
+        <span class="role">Suplente</span>
+        <h3>Ricardo Gandini</h3>
+        <p>E-mail: <a href="mailto:ricardo.gandini@ufv.br">ricardo.gandini@ufv.br</a></p>
+      </article>
+    </div>
+    <p class="small" style="margin-top:14px">Instagram da chapa: [perfil a informar]</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <ul class="social"><li><a href="#contato">Instagram</a></li><li><a href="#contato">E-mail</a></li></ul>
+    <p><strong>Copyright © 2026 Chapa 1 · Conselho Deliberativo do Agros</strong></p>
+    <p>Material de campanha eleitoral da Chapa 1, produzido pela própria chapa e sem vínculo institucional com o Agros ou com a UFV. Este site não é o site do Agros e não usa o nome, o logotipo ou a estrutura do Instituto. Informações oficiais sobre a eleição estão no site do Agros e com a Comissão Eleitoral.</p>
+    <p>Versão provisória de 13/11/2026.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var fs=0,root=document.documentElement;
+  [].slice.call(document.querySelectorAll('[data-fs]')).forEach(function(b){
+    b.addEventListener('click',function(){
+      var d=parseInt(b.getAttribute('data-fs'),10);
+      fs=d===0?0:Math.max(-1,Math.min(3,fs+d));
+      root.style.fontSize=(100+fs*10)+'%';
+    });
+  });
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  function show(t){
+    tabs.forEach(function(b){
+      var on=b===t;
+      b.setAttribute('aria-selected',on?'true':'false');
+      document.getElementById(b.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){show(b)});
+    b.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft')n=tabs[(i+tabs.length-1)%tabs.length];
+      if(n){n.focus();show(n);e.preventDefault();}
+    });
+  });
+  var btn=document.getElementById('copy'),ok=document.getElementById('ok');
+  btn.addEventListener('click',function(){
+    var txt=document.getElementById('msg').textContent;
+    var done=function(m){ok.textContent=m;setTimeout(function(){ok.textContent=''},3000)};
+    try{
+      navigator.clipboard.writeText(txt).then(function(){done('Copiado')},function(){done('Selecione o texto e copie manualmente')});
+    }catch(e){done('Selecione o texto e copie manualmente')}
+  });
+})();
+</script>
+</body>
+</html>
